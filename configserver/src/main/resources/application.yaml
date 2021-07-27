@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: cserv
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/BenTels/config-server-test-config-repo.git
+          clone-on-start: true
+          default-label: main
+server:
+  port: 8088
+logging:
+  level:
+    root: fatal
+    nl: info
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
