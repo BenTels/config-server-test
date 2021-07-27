@@ -23,6 +23,7 @@
 
 	<modules>
 		<module>service</module>
+		<module>repository</module>
 		<module>configserver</module>
 	</modules>
 </project>
