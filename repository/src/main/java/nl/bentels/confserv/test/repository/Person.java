@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class Person {
 
-	@Field(name = "id")
+	@Field(name = "_id")
 	private String id;
 	private String[] firstNames;
 	private String[] middleNames;

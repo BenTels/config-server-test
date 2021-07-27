@@ -1,9 +1,11 @@
-package nl.bentels.conserv.test;
+package nl.bentels.confserv.test;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan(basePackages = "nl.bentels.confserv.test")
 public class ServiceApplication {
 
 	public static void main(String[] args) {

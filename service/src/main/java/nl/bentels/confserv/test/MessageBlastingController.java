@@ -1,4 +1,4 @@
-package nl.bentels.conserv.test;
+package nl.bentels.confserv.test;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
