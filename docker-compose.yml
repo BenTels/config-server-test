@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  vault:
+    image: vault:1.7.3
+    ports: 
+    - "8200:8200"
+    networks: 
+    - backend
+    cap_add: 
+    - IPC_LOCK
+    volumes:
+    - "$DEV/workspaces/eclipse/config-server-test/config-repo/vaultconfig:/vault/config"
+    - "$DEV/workspaces/eclipse/config-server-test/vault-data:/vault/file"
+    command: server
+    
+    
+networks:
+  backend:

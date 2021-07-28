@@ -1,6 +1,6 @@
 spring:
   application:
-    name: cserv
+    name: configserver
   cloud:
     config:
       server:
@@ -8,6 +8,16 @@ spring:
           uri: https://github.com/BenTels/config-server-test-config-repo.git
           clone-on-start: true
           default-label: main
+        vault:
+          authentication: token
+          host: localhost
+          kv-version: 2
+          skip-ssl-validation: true
+          token: s.ACNksfrpJjKMuU6ofQqQ6fx3
+  profiles:
+    active:
+    - vault
+    - git
 server:
   port: 8088
 logging:
