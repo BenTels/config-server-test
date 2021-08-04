@@ -1,0 +1,22 @@
+package nl.bentels.confserv.test;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication
+public class ConfigServerTestGatewayApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ConfigServerTestGatewayApplication.class, args);
+	}
+
+	@Bean
+	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
+		return builder.routes()
+				.route("path route 0", p -> p.path("/persons").uri("http://pserv:8080/"))
+				.build();
+	}
+}

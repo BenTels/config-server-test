@@ -3,8 +3,8 @@ version: "3.7"
 services:
   configserver:
     image:  nl.bentels.confserv.test/configserver:0.0.1-SNAPSHOT
-    ports:
-    - "8088:8088"
+#    ports:
+#    - "8088:8088"
     networks:
     - backend
     hostname: configserver
@@ -13,15 +13,25 @@ services:
     
   service:
     image: nl.bentels.confserv.test/service:0.0.1-SNAPSHOT
-    ports:
-    - "8080:8080"
+#    ports:
+#    - "8080:8080"
     networks:
     - backend
+    hostname: pserv
     environment:
     - SPRING_CONFIG_IMPORT=configserver:http://configserver:8088/
     - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_RETRY_SUPPORT=debug
     depends_on: 
     - configserver
+    
+  gateway:
+    image: nl.bentels.confserv.test/gateway:0.0.1-SNAPSHOT
+    ports:
+    - "80:8080"
+    networks:
+    - backend
+    hostname: gateway
+     
     
 networks:
   backend:
