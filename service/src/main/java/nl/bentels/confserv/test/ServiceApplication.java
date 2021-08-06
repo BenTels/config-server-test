@@ -1,5 +1,7 @@
 package nl.bentels.confserv.test;
 
+import java.util.UUID;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -20,13 +22,8 @@ public class ServiceApplication {
 		SpringApplication.run(ServiceApplication.class);
 	}
 	
-//	@Bean(name = "configServerRetryInterceptor")
-//	public RetryOperationsInterceptor configServerRetryInterceptor() {
-//		return RetryInterceptorBuilder
-//		.stateless()
-//		.backOffOptions(1000, 2, 1_000_000)
-//		.maxAttempts(200)
-//		.build();
-//	}
-	
+	@Bean
+	public UUID getServerId() {
+		return UUID.randomUUID();
+	}
 }

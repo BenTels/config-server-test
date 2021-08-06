@@ -3,26 +3,38 @@ version: "3.7"
 services:
   configserver:
     image:  nl.bentels.confserv.test/configserver:0.0.1-SNAPSHOT
-#    ports:
-#    - "8088:8088"
     networks:
     - backend
     hostname: configserver
     environment:
     - SPRING_CLOUD_CONFIG_SERVER_VAULT_HOST=vault
+    - LOGGING_LEVEL_ROOT=warn
     
-  service:
-    image: nl.bentels.confserv.test/service:0.0.1-SNAPSHOT
-#    ports:
-#    - "8080:8080"
+  serviceregistry:
+    image:  nl.bentels.confserv.test/serviceregistry:0.0.1-SNAPSHOT
     networks:
     - backend
-    hostname: pserv
-    environment:
-    - SPRING_CONFIG_IMPORT=configserver:http://configserver:8088/
-    - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_RETRY_SUPPORT=debug
+    hostname: serviceregistry
     depends_on: 
     - configserver
+    environment:
+    - LOGGING_LEVEL_ROOT=info
+    
+  service_0:
+    image: nl.bentels.confserv.test/service:0.0.1-SNAPSHOT
+    networks:
+    - backend
+    depends_on: 
+    - configserver
+    - serviceregistry
+
+  service_1:
+    image: nl.bentels.confserv.test/service:0.0.1-SNAPSHOT
+    networks:
+    - backend
+    depends_on: 
+    - configserver
+    - serviceregistry
     
   gateway:
     image: nl.bentels.confserv.test/gateway:0.0.1-SNAPSHOT
@@ -31,6 +43,10 @@ services:
     networks:
     - backend
     hostname: gateway
+    depends_on:
+    - serviceregistry
+    environment:
+    - LOGGING_LEVEL_ROOT=warn
      
     
 networks:
