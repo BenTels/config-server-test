@@ -23,6 +23,8 @@
 
 	<modules>
 		<module>service</module>
+		<module>bservice</module>
+		<module>aservice</module>
 		<module>repository</module>
 		<module>configserver</module>
 		<module>gateway</module>

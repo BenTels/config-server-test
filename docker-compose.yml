@@ -14,6 +14,8 @@ services:
     image:  nl.bentels.confserv.test/serviceregistry:0.0.1-SNAPSHOT
     networks:
     - backend
+    ports:
+    - "8761:8761"
     hostname: serviceregistry
     depends_on: 
     - configserver
@@ -35,6 +37,27 @@ services:
     depends_on: 
     - configserver
     - serviceregistry
+
+  b_service_0:
+    image: nl.bentels.confserv.test/bservice:0.0.1-SNAPSHOT
+    networks:
+    - backend
+    depends_on: 
+    - configserver
+    - serviceregistry
+
+  a_service_0:
+    image: nl.bentels.confserv.test/aservice:0.0.1-SNAPSHOT
+    networks:
+    - backend
+    depends_on: 
+    - configserver
+    - serviceregistry
+    - service_0
+    - service_1
+    - b_service_0
+    environment:
+    - LOGGING_LEVEL_ROOT=info
     
   gateway:
     image: nl.bentels.confserv.test/gateway:0.0.1-SNAPSHOT
@@ -46,7 +69,7 @@ services:
     depends_on:
     - serviceregistry
     environment:
-    - LOGGING_LEVEL_ROOT=warn
+    - LOGGING_LEVEL_ROOT=info
      
     
 networks:
